@@ -12,7 +12,7 @@ var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var http = require('http');
 
-var port = process.env.PORT || 4000;
+var port = process.env.PORT || 5000;
 
 app.use('/assets', express.static(__dirname + '/public'));
 app.use('/models', express.static(__dirname + '/models'));
@@ -22,10 +22,11 @@ app.engine('html', cons.swig);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
-/* Routes */
+/* Routes 
 app.get('/', function (req, res, next) {
     res.render('index.html');   
 });
+*/
 
 /* Mysql connect */
 var connection = mysql.createConnection({
@@ -95,7 +96,7 @@ connection.query(sql, db,  ((error, results, fields) => {
 
 /* Re-directs all non API to the index page */
 app.get('/', function (req, res, next) {
-    res.render('index.html');
+    res.send("Now the use the different API to GET, POST, UPDATE, MODIFY....");
 });
 
 /* Start the express Server */
@@ -103,4 +104,3 @@ http.createServer(app).listen(app.get('port'), function () {
     console.log('The server is running at port: ' + port + "...");
     app.listen(port);
 });
-/**/
